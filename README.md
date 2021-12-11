@@ -1,4 +1,4 @@
-# Youtube Dl bot 😉
+# Youtube DL bot 😉
 ## Prerequisite
     ffmpeg
   
