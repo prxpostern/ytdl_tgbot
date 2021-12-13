@@ -65,7 +65,7 @@ async def extract_formats(yturl):
         buttons.append(
             [
                 InlineKeyboardButton(
-                    f"{first} [{format_note}] {acodec} [{filesize}]",
+                    f"{first} [{format_note}] [{filesize}] {acodec}",
                     f"{media_type}_{listed['format_id']}_{av_codec}_{info['id']}",
                 )
             ]
