@@ -45,7 +45,13 @@ async def ytdl(_, message):
     #status = await message.reply_text("Fetching thumbnail...", quote=True)
     info2 = json.dumps(info)
     print(info2)
-    
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(info, f, ensure_ascii=False)
+        f.close()
+    await _.send_document(
+        chat_id=message.chat.id,
+        document="data.json"
+    )
     """
     if Config.CUSTOM_THUMB:
         await asyncio.sleep(Config.EDIT_TIME)
