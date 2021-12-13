@@ -43,7 +43,7 @@ async def ytdl(_, message):
         return
 
     #status = await message.reply_text("Fetching thumbnail...", quote=True)
-    status = await message.reply_text(text=f"{info}", quote=True)
+    print(info)
     
     """
     if Config.CUSTOM_THUMB:
