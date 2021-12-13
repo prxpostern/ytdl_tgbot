@@ -39,7 +39,7 @@ async def extract_formats(yturl):
     )"""
     for listed in info.get("formats"):
         if listed.get("acodec") == "none":
-            pass
+            continue
         #media_type = "Audio" if "audio" in listed.get("format") else "Video"
         media_type = listed.get("format")
         format_note = listed.get("ext")
