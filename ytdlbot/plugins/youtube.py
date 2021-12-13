@@ -43,7 +43,7 @@ async def ytdl(_, message):
         return
 
     #status = await message.reply_text("Fetching thumbnail...", quote=True)
-    info2 = json.loads(info)
+    info2 = json.dumps(info)
     print(info2)
     
     """
