@@ -5,12 +5,17 @@ from hachoir.parser import createParser
 
 
 def humanbytes(size):
-    # https://stackoverflow.com/a/43690506
-    for unit in ["B", "KiB", "MiB", "GiB", "TiB", "PiB"]:
-        if size < 1024.0 or unit == "PiB":
-            break
-        size /= 1024.0
-    return f"{size:.2f} {unit}"
+    # https://stackoverflow.com/a/49361727/4723940
+    # 2**10 = 1024
+    if not size:
+        return ""
+    power = 2 ** 10
+    n = 0
+    Dic_powerN = {0: ' ', 1: 'Ki', 2: 'Mi', 3: 'Gi', 4: 'Ti'}
+    while size > power:
+        size /= power
+        n += 1
+    return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
 
 
 def width_and_height(thumbnail_path):
