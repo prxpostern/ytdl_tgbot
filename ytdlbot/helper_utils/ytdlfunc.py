@@ -41,14 +41,23 @@ async def extract_formats(yturl):
         if listed.get("acodec") == "none":
             continue
         media_type = "Audio" if "audio" in listed.get("format") else "Video"
-        first = listed.get("format_id") if "audio" in listed.get("format") else listed.get("format")
+        
+        if "audio" in listed.get("format"):
+            first = str(listed.get("format_id")) + " - Audio"
+        else:
+            first = listed.get("format")
         
         #format_note = listed.get("format_note", "format")
         format_note = listed.get("ext")
         # SpEcHiDe/AnyDLBot/anydlbot/plugins/youtube_dl_echo.py#L112
-        filesize = (
-            humanbytes(listed.get("filesize")) if listed.get("filesize") else "0 MiB"
-        )
+        
+        if listed.get("filesize"):
+            filesize = humanbytes(listed.get("filesize"))
+        elif listed.get("filesize_approx"):
+            filesize = humanbytes(listed.get("filesize_approx"))
+        else:
+            filesize = "null"
+        
         acodec = listed.get("acodec")
         av_codec = "empty"
         if listed.get("acodec") == "none" or listed.get("vcodec") == "none":
