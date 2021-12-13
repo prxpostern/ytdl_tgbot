@@ -38,26 +38,30 @@ async def extract_formats(yturl):
         info.get("title"), info.get("duration"), info.get("upload_date")
     )"""
     for listed in info.get("formats"):
-        media_type = "Audio" if "audio" in listed.get("format") else "Video"
-        format_note = listed.get("format_note", "format")
+        if listed.get("acodec") == "none":
+            pass
+        #media_type = "Audio" if "audio" in listed.get("format") else "Video"
+        media_type = listed.get("format")
+        format_note = listed.get("ext")
         # SpEcHiDe/AnyDLBot/anydlbot/plugins/youtube_dl_echo.py#L112
         filesize = (
             humanbytes(listed.get("filesize")) if listed.get("filesize") else "(best)"
         )
+        acodec = listed.get("acodec")
         av_codec = "empty"
         if listed.get("acodec") == "none" or listed.get("vcodec") == "none":
             av_codec = "none"
         buttons.append(
             [
                 InlineKeyboardButton(
-                    f"{media_type} {format_note} [{listed['ext']}] {filesize}",
+                    f"{media_type} [{format_note}] {acodec} [{filesize}]",
                     f"{media_type}_{listed['format_id']}_{av_codec}_{info['id']}",
                 )
             ]
         )
 
-    #return info.get("id"), info.get("thumbnail"), info.get("title"), buttons
-    return info
+    return info.get("id"), info.get("thumbnail"), info.get("title"), buttons
+    #return info
 
 
 # The codes below were referenced after
