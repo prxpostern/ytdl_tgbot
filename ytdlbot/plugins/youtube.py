@@ -29,7 +29,8 @@ async def ytdl(_, message):
     url = message.text.strip()
     await message.reply_chat_action("typing")
     try:
-        video_id, thumbnail_url, title, buttons = await extract_formats(url)
+        #video_id, thumbnail_url, title, buttons = await extract_formats(url)
+        info = await extract_formats(url)
 
         now = datetime.now()
         user_time[user_id] = now + timedelta(minutes=Config.TIMEOUT)
@@ -41,7 +42,10 @@ async def ytdl(_, message):
         )
         return
 
-    status = await message.reply_text("Fetching thumbnail...", quote=True)
+    #status = await message.reply_text("Fetching thumbnail...", quote=True)
+    status = await message.reply_text(text=f"{info}", quote=True)
+    
+    """
     if Config.CUSTOM_THUMB:
         await asyncio.sleep(Config.EDIT_TIME)
         await status.edit_text("Found Custom thumbnail, Gotta pull it now.")
