@@ -1,4 +1,4 @@
-import asyncio
+import asyncio, json
 import re
 from datetime import datetime, timedelta
 
@@ -43,7 +43,8 @@ async def ytdl(_, message):
         return
 
     #status = await message.reply_text("Fetching thumbnail...", quote=True)
-    print(info)
+    info2 = json.loads(info)
+    print(info2)
     
     """
     if Config.CUSTOM_THUMB:
