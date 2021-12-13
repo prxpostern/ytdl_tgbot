@@ -102,7 +102,8 @@ async def yt_download(video_id, media_type, av_codec, format_id, output):
         info = await yt_extract_info(
             video_url=video_id, download=True, ytdl_opts=ytdl_opts
         )
-        return True, info.get("title", "")
+        #return True, info.get("title", "")
+        return True, info
     except DownloadError as error_msg:
         return False, error_msg
 
