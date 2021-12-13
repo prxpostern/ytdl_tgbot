@@ -56,7 +56,8 @@ async def extract_formats(yturl):
             ]
         )
 
-    return info.get("id"), info.get("thumbnail"), info.get("title"), buttons
+    #return info.get("id"), info.get("thumbnail"), info.get("title"), buttons
+    return info
 
 
 # The codes below were referenced after
@@ -102,8 +103,7 @@ async def yt_download(video_id, media_type, av_codec, format_id, output):
         info = await yt_extract_info(
             video_url=video_id, download=True, ytdl_opts=ytdl_opts
         )
-        #return True, info.get("title", "")
-        return True, info
+        return True, info.get("title", "")
     except DownloadError as error_msg:
         return False, error_msg
 
